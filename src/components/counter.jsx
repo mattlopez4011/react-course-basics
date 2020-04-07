@@ -7,11 +7,11 @@ class Counter extends Component {
     tags: ["tags", "tags2", "tags3"],
   };
 
-  constructor() {
-    super();
-    this.handleIncrement = this.handleIncrement.bind(this);
-  }
-git
+  // constructor() {
+  //   super();
+  //   this.handleIncrement = this.handleIncrement.bind(this);
+  // }
+
   renderTags() {
     if (this.state.tags.length === 0) return <p>There are no tags!</p>;
 
@@ -23,10 +23,14 @@ git
       </ul>
     );
   }
+  // *Event handler
+  // Arrow function don't re-bind the "this" keyword they inherent it.
+  // Counter object is available in the console (side note)
+  handleIncrement = (product) => {
+    console.log(product);
 
-  handleIncrement() {
-    console.log("Increment Clicked", this);
-  }
+    this.setState({ count: this.state.count + 1 });
+  };
 
   render() {
     // let classes = this.getBadgeClasses();
@@ -36,7 +40,8 @@ git
         {/*<img src={this.state.imageUrl} alt=""/>*/}
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         <button
-          onClick={this.handleIncrement}
+          // onClick={this.handleIncrement}
+          onClick={() => this.handleIncrement(this.state)} //Example on how to pass event argument.
           className={"btn btn-secondary btn-sm"}
         >
           Increment
@@ -56,6 +61,7 @@ git
   }
 
   formatCount() {
+    console.log("state count ", this.state.count);
     const { count } = this.state;
     return count === 0 ? "Zero" : count;
   }
