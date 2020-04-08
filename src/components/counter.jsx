@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 class Counter extends Component {
   state = {
-    count: 0,
+    value: this.props.counter.value,
+    // value: this.props.value,
     // imageUrl: 'https://picsum.photos/200'
     tags: ["tags", "tags2", "tags3"],
   };
@@ -29,14 +30,21 @@ class Counter extends Component {
   handleIncrement = (product) => {
     console.log(product);
 
-    this.setState({ count: this.state.count + 1 });
+    this.setState({ value: this.state.value + 1 });
   };
 
   render() {
     // let classes = this.getBadgeClasses();
+    // Shows the children passed
+    console.log(this.props);
 
     return (
       <div>
+        {/*Adds H2 element from Counters component*/}
+        {/*{this.props.children}*/}
+
+        {/*Receiving element id from Counters component*/}
+        <h4>{this.props.id}</h4>
         {/*<img src={this.state.imageUrl} alt=""/>*/}
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         <button
@@ -46,10 +54,18 @@ class Counter extends Component {
         >
           Increment
         </button>
-        <div>
-          {this.state.tags.length === 0 && "Please create a new tag!"}
-          {this.renderTags()}
-        </div>
+        {/*Delete Button*/}
+        <button
+          onClick={() => this.props.onDelete(this.props.counter.id)}
+          className="btn btn-danger btn-sm m-2"
+        >
+          Delete
+        </button>
+        {/*List of tags*/}
+        {/*<div>*/}
+        {/*  {this.state.tags.length === 0 && "Please create a new tag!"}*/}
+        {/*  {this.renderTags()}*/}
+        {/*</div>*/}
       </div>
     );
   }
@@ -61,9 +77,9 @@ class Counter extends Component {
   }
 
   formatCount() {
-    console.log("state count ", this.state.count);
-    const { count } = this.state;
-    return count === 0 ? "Zero" : count;
+    console.log("state value ", this.state.value);
+    const { value } = this.state;
+    return value === 0 ? "Zero" : value;
   }
 }
 
