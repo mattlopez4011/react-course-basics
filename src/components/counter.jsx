@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
 class Counter extends Component {
-  state = {
-    value: this.props.counter.value,
-    // value: this.props.value,
-    // imageUrl: 'https://picsum.photos/200'
-    tags: ["tags", "tags2", "tags3"],
-  };
+  // state = {
+  //   value: this.props.counter.value,
+  //   // value: this.props.value,
+  //   // imageUrl: 'https://picsum.photos/200'
+  //   tags: ["tags", "tags2", "tags3"],
+  // };
 
   // constructor() {
   //   super();
@@ -27,11 +27,11 @@ class Counter extends Component {
   // *Event handler
   // Arrow function don't re-bind the "this" keyword they inherent it.
   // Counter object is available in the console (side note)
-  handleIncrement = (product) => {
-    console.log(product);
-
-    this.setState({ value: this.state.value + 1 });
-  };
+  // handleIncrement = (product) => {
+  //   console.log(product);
+  //
+  //   this.setState({ value: this.state.value + 1 });
+  // };
 
   render() {
     // let classes = this.getBadgeClasses();
@@ -49,7 +49,8 @@ class Counter extends Component {
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         <button
           // onClick={this.handleIncrement}
-          onClick={() => this.handleIncrement(this.state)} //Example on how to pass event argument.
+          // onClick={() => this.handleIncrement(this.state)} //Example on how to pass event argument.
+          onClick={() => this.props.onIncrement(this.props.counter)} //Calls the method in parent component and sends the current counter object.
           className={"btn btn-secondary btn-sm"}
         >
           Increment
@@ -72,13 +73,12 @@ class Counter extends Component {
 
   getBadgeClasses() {
     let classes = "badge m-2 badge-";
-    classes += this.state.count === 0 ? "warning" : "primary";
+    classes += this.props.counter.value === 0 ? "warning" : "primary";
     return classes;
   }
 
   formatCount() {
-    console.log("state value ", this.state.value);
-    const { value } = this.state;
+    const { value } = this.props.counter;
     return value === 0 ? "Zero" : value;
   }
 }
