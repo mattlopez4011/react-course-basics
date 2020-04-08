@@ -11,6 +11,15 @@ class Counters extends Component {
     ],
   };
 
+  // Increment method
+  handleIncrement = (counter) => {
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index] = { ...counter }; // This is the counter object from the parameter. Sent by the counter component. You do not want to modify the local state object.
+    counters[index].value++; // increment by 1
+    this.setState({ counters });
+  };
+
   // Reset counters array to default.
   handleReset = () => {
     const counters = this.state.counters.map((c) => {
@@ -42,6 +51,7 @@ class Counters extends Component {
           <Counter
             key={counter.id}
             onDelete={this.handleDelete}
+            onIncrement={this.handleIncrement}
             // value={counter.value}
             // id={counter.id}
             // Counter object will contain all props like value, id etc...
