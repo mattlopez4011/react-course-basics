@@ -10,8 +10,8 @@ import Counters from "./components/counters";
 
 ReactDOM.render(
   // <Counter />
-  // <App />,
-  <Counters />,
+  <App />,
+  // <Counters />,
   document.getElementById("root")
 );
 
