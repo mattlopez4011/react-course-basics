@@ -14,12 +14,35 @@ class App extends Component {
     ],
   };
 
+  // The constructor will initialize properties for this component.
+  constructor(props) {
+    super(props);
+    console.log("App - Constructor", this.props);
+    // this.state = this.props.something;
+  }
+
+  // Called after the component has been rendered to the DOM.
+  componentDidMount() {
+    // Ajax Call
+    // this.setState({movies})
+    console.log("App - Mounted");
+  }
+
   // Increment method
   handleIncrement = (counter) => {
     const counters = [...this.state.counters];
     const index = counters.indexOf(counter);
     counters[index] = { ...counter }; // This is the counter object from the parameter. Sent by the counter component. You do not want to modify the local state object.
     counters[index].value++; // increment by 1
+    this.setState({ counters });
+  };
+
+  // Decrement Method
+  handleDecrement = (counter) => {
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index] = { ...counter }; // This is the counter object from the parameter. Sent by the counter component. You do not want to modify the local state object.
+    counters[index].value--; // increment by 1
     this.setState({ counters });
   };
 
@@ -41,6 +64,8 @@ class App extends Component {
   };
 
   render() {
+    console.log("App - Rendered");
+
     return (
       <React.Fragment>
         {/*Filter returns counters that are greater than 0.*/}
@@ -53,6 +78,7 @@ class App extends Component {
             counters={this.state.counters}
             onReset={this.handleReset}
             onIncrement={this.handleIncrement}
+            onDecrement={this.handleDecrement}
             onDelete={this.handleDelete}
           />
         </main>
